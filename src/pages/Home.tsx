@@ -180,13 +180,13 @@ export default function Home() {
       </section>
 
       {/* Features */}
-      <section className="py-16">
+      <section className="py-12 md:py-16">
         <div className="container mx-auto px-4">
-          <h2 className="font-display text-2xl font-bold text-center mb-12">Why GameFlex?</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <h2 className="font-display text-2xl font-bold text-center mb-8 md:mb-12">Why GameFlex?</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {features.map((feature) => (
-              <div key={feature.title} className="p-6 rounded-xl bg-card border border-border/50 text-center">
-                <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+              <div key={feature.title} className="p-6 rounded-xl bg-card border border-border/50 text-center flex flex-col items-center">
+                <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 shrink-0">
                   <feature.icon className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="font-display font-semibold mb-2">{feature.title}</h3>
