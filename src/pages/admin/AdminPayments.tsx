@@ -93,8 +93,8 @@ export default function AdminPayments() {
   return (
     <div>
       <h1 className="font-display text-2xl font-bold mb-6">Payment Verification</h1>
-      <div className="rounded-xl bg-card border border-border/50 overflow-hidden">
-        <div className="grid grid-cols-8 gap-4 p-4 bg-secondary/50 text-sm font-semibold text-muted-foreground">
+      <div className="rounded-xl bg-card border border-border/50 overflow-x-auto">
+        <div className="grid grid-cols-8 gap-4 p-4 min-w-[1000px] bg-secondary/50 text-sm font-semibold text-muted-foreground">
           <div>Transaction</div>
           <div>User</div>
           <div>Tournament</div>
@@ -105,7 +105,7 @@ export default function AdminPayments() {
           <div>Actions</div>
         </div>
         {payments.map((payment: any) => (
-          <div key={payment.id} className="grid grid-cols-8 gap-4 p-4 border-t border-border/50 items-center text-sm">
+          <div key={payment.id} className="grid grid-cols-8 gap-4 p-4 min-w-[1000px] border-t border-border/50 items-center text-sm">
             <div className="font-mono truncate">{payment.transaction_code ?? '-'}</div>
             <div className="truncate">{payment.profile?.username ?? '-'}</div>
             <div className="truncate">{payment.tournaments?.title ?? '-'}</div>

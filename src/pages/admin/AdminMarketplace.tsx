@@ -123,8 +123,8 @@ export default function AdminMarketplace() {
         </div>
       </div>
 
-      <div className="rounded-xl bg-card border border-border/50 overflow-hidden">
-        <div className="grid grid-cols-7 gap-4 p-4 bg-secondary/50 text-sm font-semibold text-muted-foreground">
+      <div className="rounded-xl bg-card border border-border/50 overflow-x-auto">
+        <div className="grid grid-cols-7 gap-4 p-4 min-w-[900px] bg-secondary/50 text-sm font-semibold text-muted-foreground">
           <div className="col-span-2">Listing</div>
           <div>Seller</div>
           <div>Category</div>
@@ -141,7 +141,7 @@ export default function AdminMarketplace() {
           filteredListings.map((listing: any) => {
             const seller = getSellerInfo(listing.seller_id);
             return (
-              <div key={listing.id} className="grid grid-cols-7 gap-4 p-4 border-t border-border/50 items-center text-sm">
+              <div key={listing.id} className="grid grid-cols-7 gap-4 p-4 min-w-[900px] border-t border-border/50 items-center text-sm">
                 <div className="col-span-2 flex items-center gap-3">
                   {listing.image_url ? (
                     <img src={listing.image_url} alt={listing.title} className="h-12 w-12 object-cover rounded-lg" />

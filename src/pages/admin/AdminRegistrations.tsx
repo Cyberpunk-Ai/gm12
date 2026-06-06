@@ -206,8 +206,8 @@ export default function AdminRegistrations() {
       </div>
 
       {/* Table */}
-      <div className="rounded-xl bg-card border border-border/50 overflow-hidden">
-        <div className="grid grid-cols-7 gap-4 p-4 bg-secondary/50 text-sm font-semibold text-muted-foreground">
+      <div className="rounded-xl bg-card border border-border/50 overflow-x-auto">
+        <div className="grid grid-cols-7 gap-4 p-4 min-w-[900px] bg-secondary/50 text-sm font-semibold text-muted-foreground">
           <div>Player</div>
           <div>Game Handle</div>
           <div className="col-span-2">Tournament</div>
@@ -222,7 +222,7 @@ export default function AdminRegistrations() {
           </div>
         ) : filteredRegistrations.length > 0 ? (
           filteredRegistrations.map((r: any) => (
-            <div key={r.id} className="grid grid-cols-7 gap-4 p-4 border-t border-border/50 items-center text-sm">
+            <div key={r.id} className="grid grid-cols-7 gap-4 p-4 min-w-[900px] border-t border-border/50 items-center text-sm">
               <div>
                 <p className="font-medium">{r.profile?.username ?? 'Unknown'}</p>
                 <p className="text-xs text-muted-foreground">{r.profile?.email}</p>

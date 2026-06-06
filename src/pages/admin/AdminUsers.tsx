@@ -89,8 +89,8 @@ export default function AdminUsers() {
           />
         </div>
       </div>
-      <div className="rounded-xl bg-card border border-border/50 overflow-hidden">
-        <div className="grid grid-cols-7 gap-4 p-4 bg-secondary/50 text-sm font-semibold text-muted-foreground">
+      <div className="rounded-xl bg-card border border-border/50 overflow-x-auto">
+        <div className="grid grid-cols-7 gap-4 p-4 min-w-[900px] bg-secondary/50 text-sm font-semibold text-muted-foreground">
           <div className="col-span-2">User</div>
           <div>Phone</div>
           <div>Balance</div>
@@ -99,7 +99,7 @@ export default function AdminUsers() {
           <div>Actions</div>
         </div>
         {filteredUsers.map((user: any) => (
-          <div key={user.id} className="grid grid-cols-7 gap-4 p-4 border-t border-border/50 items-center text-sm">
+          <div key={user.id} className="grid grid-cols-7 gap-4 p-4 min-w-[900px] border-t border-border/50 items-center text-sm">
             <div className="col-span-2 flex items-center gap-3">
               <Avatar className="h-10 w-10">
                 <AvatarImage src={user.avatar_url} />

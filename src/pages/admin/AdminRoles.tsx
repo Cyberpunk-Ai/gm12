@@ -191,8 +191,8 @@ export default function AdminRoles() {
       </div>
 
       {/* Roles Table */}
-      <div className="rounded-xl bg-card border border-border/50 overflow-hidden">
-        <div className="grid grid-cols-5 gap-4 p-4 bg-secondary/50 text-sm font-semibold text-muted-foreground">
+      <div className="rounded-xl bg-card border border-border/50 overflow-x-auto">
+        <div className="grid grid-cols-5 gap-4 p-4 min-w-[800px] bg-secondary/50 text-sm font-semibold text-muted-foreground">
           <div className="col-span-2">User</div>
           <div>Role</div>
           <div>Assigned</div>
@@ -207,7 +207,7 @@ export default function AdminRoles() {
           filteredRoles.map((role: any) => {
             const profile = getProfile(role.user_id);
             return (
-              <div key={role.id} className="grid grid-cols-5 gap-4 p-4 border-t border-border/50 items-center text-sm">
+              <div key={role.id} className="grid grid-cols-5 gap-4 p-4 min-w-[800px] border-t border-border/50 items-center text-sm">
                 <div className="col-span-2 flex items-center gap-3">
                   <Avatar className="h-10 w-10">
                     <AvatarImage src={profile?.avatar_url} />

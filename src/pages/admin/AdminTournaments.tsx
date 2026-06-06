@@ -237,8 +237,8 @@ export default function AdminTournaments() {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="rounded-xl bg-card border border-border/50 overflow-hidden">
-        <div className="grid grid-cols-8 gap-4 p-4 bg-secondary/50 text-sm font-semibold text-muted-foreground">
+      <div className="rounded-xl bg-card border border-border/50 overflow-x-auto">
+        <div className="grid grid-cols-8 gap-4 p-4 min-w-[1000px] bg-secondary/50 text-sm font-semibold text-muted-foreground">
           <div className="col-span-2">Tournament</div>
           <div>Game</div>
           <div>Prize</div>
@@ -248,7 +248,7 @@ export default function AdminTournaments() {
           <div>Actions</div>
         </div>
         {tournaments.map((t: any) => (
-          <div key={t.id} className="grid grid-cols-8 gap-4 p-4 border-t border-border/50 items-center text-sm">
+          <div key={t.id} className="grid grid-cols-8 gap-4 p-4 min-w-[1000px] border-t border-border/50 items-center text-sm">
             <div className="col-span-2 flex items-center gap-3">
               {t.image_url && <img src={t.image_url} alt="" className="h-10 w-14 object-cover rounded" />}
               <span className="font-semibold truncate">{t.title}</span>

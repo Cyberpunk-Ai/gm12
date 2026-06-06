@@ -326,8 +326,8 @@ export default function AdminGameRooms() {
       {expiredRooms.length > 0 && (
         <div>
           <h2 className="font-display font-bold text-lg mb-4 text-muted-foreground">Expired Rooms</h2>
-          <div className="rounded-xl bg-card border border-border/50 overflow-hidden">
-            <div className="grid grid-cols-5 gap-4 p-4 bg-secondary/50 text-sm font-semibold text-muted-foreground">
+          <div className="rounded-xl bg-card border border-border/50 overflow-x-auto">
+            <div className="grid grid-cols-5 gap-4 p-4 min-w-[800px] bg-secondary/50 text-sm font-semibold text-muted-foreground">
               <div>Tournament</div>
               <div>Room Code</div>
               <div>Platform</div>
@@ -335,7 +335,7 @@ export default function AdminGameRooms() {
               <div>Actions</div>
             </div>
             {expiredRooms.slice(0, 10).map((room: any) => (
-              <div key={room.id} className="grid grid-cols-5 gap-4 p-4 border-t border-border/50 items-center text-sm opacity-60">
+              <div key={room.id} className="grid grid-cols-5 gap-4 p-4 min-w-[800px] border-t border-border/50 items-center text-sm opacity-60">
                 <div className="truncate">{room.tournaments?.title}</div>
                 <div className="font-mono">{room.room_code}</div>
                 <div className="capitalize">{room.platform}</div>
