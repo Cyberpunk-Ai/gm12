@@ -93,6 +93,9 @@ export default function Login() {
                     <FormMessage />
                   </FormItem>
                 )} />
+                <div className="flex justify-end -mt-2">
+                  <Link to="/forgot-password" className="text-xs text-primary hover:underline">Forgot password?</Link>
+                </div>
                 <Button type="submit" className="w-full" variant="neon" disabled={isLoading}>
                   {isLoading ? 'Signing in...' : 'Sign In'}
                 </Button>
