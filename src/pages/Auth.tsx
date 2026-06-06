@@ -75,7 +75,7 @@ const Auth = () => {
     } else {
       toast({
         title: 'Account Created!',
-        description: 'Welcome to Mpesa Gaming Hub!',
+        description: 'Welcome to GameFlex!',
       });
       navigate('/dashboard');
     }
@@ -94,7 +94,7 @@ const Auth = () => {
               <Gamepad2 className="w-8 h-8 text-primary" />
             </div>
           </div>
-          <CardTitle className="text-2xl font-bold font-display">Mpesa Gaming Hub</CardTitle>
+          <CardTitle className="text-2xl font-bold font-display">Game<span className="text-primary">Flex</span></CardTitle>
           <CardDescription>Compete, Win, Earn</CardDescription>
         </CardHeader>
         

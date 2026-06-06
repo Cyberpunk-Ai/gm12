@@ -7,6 +7,10 @@ import { AuthProvider } from "@/lib/auth-context";
 import { Layout } from "@/components/layout";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import Tournaments from "./pages/Tournaments";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
@@ -95,8 +99,10 @@ const App = () => (
               <Route path="/how-it-works" element={<HowItWorks />} />
             </Route>
             <Route path="/auth" element={<Auth />} />
-            <Route path="/login" element={<Auth />} />
-            <Route path="/register" element={<Auth />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
               <Route path="tournaments" element={<AdminTournaments />} />
