@@ -75,7 +75,7 @@ const Auth = () => {
     } else {
       toast({
         title: 'Account Created!',
-        description: 'Welcome to Mpesa Gaming Hub!',
+        description: 'Welcome to GameFlex!',
       });
       navigate('/dashboard');
     }
