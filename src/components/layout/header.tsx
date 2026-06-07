@@ -33,6 +33,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 const navigation = [
   { name: 'Home', href: '/' },
+  { name: 'Live', href: '/live', live: true },
   { name: 'Tournaments', href: '/tournaments' },
   { name: 'Leaderboard', href: '/leaderboard' },
   { name: 'Achievements', href: '/achievements' },

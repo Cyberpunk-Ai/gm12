@@ -33,6 +33,8 @@ import Rewards from "./pages/Rewards";
 import MyMatches from "./pages/MyMatches";
 import Wallet from "./pages/Wallet";
 import Messages from "./pages/Messages";
+import Live from "./pages/Live";
+import LiveMatch from "./pages/LiveMatch";
 import Social from "./pages/Social";
 import Achievements from "./pages/Achievements";
 import PlayerProfile from "./pages/PlayerProfile";
@@ -89,6 +91,8 @@ const App = () => (
               <Route path="/my-matches" element={<MyMatches />} />
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/messages" element={<Messages />} />
+              <Route path="/live" element={<Live />} />
+              <Route path="/live/match/:id" element={<LiveMatch />} />
               <Route path="/social" element={<Social />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/privacy" element={<Privacy />} />
