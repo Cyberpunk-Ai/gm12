@@ -134,6 +134,16 @@ const MyMatches = () => {
             </div>
             <Badge variant="outline">{match.tournaments?.game}</Badge>
           </div>
+
+          {match.status === 'live' && (
+            <Link
+              to={`/live/match/${match.id}`}
+              className="mt-4 inline-flex items-center justify-center gap-2 w-full px-4 py-2 rounded-lg bg-red-500/20 text-red-500 border border-red-500/30 hover:bg-red-500/30 transition-colors text-sm font-medium"
+            >
+              <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+              Watch Live
+            </Link>
+          )}
         </CardContent>
       </Card>
     );
