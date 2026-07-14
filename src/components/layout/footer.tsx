@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Trophy, Twitter, Instagram, Youtube, MessageCircle, Mail, Phone } from 'lucide-react';
+import { useState } from 'react';
+import { Trophy, Twitter, Instagram, Youtube, MessageCircle, Mail, Phone, Download } from 'lucide-react';
+import { DownloadAppDialog } from '@/components/download-app-dialog';
 
 const footerLinks = {
   platform: [
@@ -30,6 +32,7 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const [downloadOpen, setDownloadOpen] = useState(false);
   return (
     <footer className="bg-card border-t border-border/50">
       <div className="container mx-auto px-4 py-12">
@@ -114,6 +117,26 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Download App CTA */}
+        <div className="mt-10 rounded-xl border border-primary/30 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="text-center sm:text-left">
+            <h3 className="font-display font-semibold text-lg flex items-center gap-2 justify-center sm:justify-start">
+              <Download className="h-5 w-5 text-primary" />
+              Get the GameFlex App
+            </h3>
+            <p className="text-sm text-muted-foreground mt-1">
+              Install GameFlex on your phone or desktop for the fastest experience.
+            </p>
+          </div>
+          <button
+            onClick={() => setDownloadOpen(true)}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30"
+          >
+            <Download className="h-4 w-4" />
+            Download App
+          </button>
+        </div>
+
         {/* Contact Info */}
         <div className="mt-12 pt-8 border-t border-border/50">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -133,6 +156,7 @@ export function Footer() {
           </div>
         </div>
       </div>
+      <DownloadAppDialog open={downloadOpen} onOpenChange={setDownloadOpen} />
     </footer>
   );
 }

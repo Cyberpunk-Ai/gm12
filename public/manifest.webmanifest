@@ -1,0 +1,26 @@
+{
+  "name": "GameFlex - Kenya's Premier Gaming Tournament Platform",
+  "short_name": "GameFlex",
+  "description": "Join Kenya's biggest gaming tournaments. Compete in FIFA, COD, PUBG, Fortnite & more.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0716",
+  "theme_color": "#7c3aed",
+  "categories": ["games", "entertainment", "sports"],
+  "icons": [
+    {
+      "src": "/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
