@@ -210,13 +210,19 @@ export default function Leaderboard() {
                         <TooltipContent>Contact via WhatsApp</TooltipContent>
                       </Tooltip>
                     )}
-                    <FollowButton 
-                      userId={player.user_id} 
-                      username={player.profiles?.username}
-                      size="sm"
-                      showText={false}
-                      className="mt-3"
-                    />
+                    <div className="flex justify-center gap-2 mt-3">
+                      <FollowButton 
+                        userId={player.user_id} 
+                        username={player.profiles?.username}
+                        size="sm"
+                        showText={false}
+                      />
+                      <Button asChild size="sm" variant="outline" title="Message">
+                        <Link to={`/messages?user=${player.user_id}`}>
+                          <MessageCircle className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                    </div>
                   </div>
                 );
               })}
