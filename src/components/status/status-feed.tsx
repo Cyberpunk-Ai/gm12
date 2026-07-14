@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/lib/auth-context';
 import { formatDistanceToNow } from 'date-fns';
-import { Heart, Eye, Trash2, Image as ImageIcon, Share2, Lock } from 'lucide-react';
+import { Heart, Eye, Trash2, Image as ImageIcon, Share2, Lock, MessageCircle, Users } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
