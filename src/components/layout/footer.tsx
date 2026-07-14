@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Trophy, Twitter, Instagram, Youtube, MessageCircle, Mail, Phone } from 'lucide-react';
+import { useState } from 'react';
+import { Trophy, Twitter, Instagram, Youtube, MessageCircle, Mail, Phone, Download } from 'lucide-react';
+import { DownloadAppDialog } from '@/components/download-app-dialog';
 
 const footerLinks = {
   platform: [
@@ -30,6 +32,7 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const [downloadOpen, setDownloadOpen] = useState(false);
   return (
     <footer className="bg-card border-t border-border/50">
       <div className="container mx-auto px-4 py-12">
