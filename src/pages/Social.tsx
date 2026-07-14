@@ -55,12 +55,12 @@ export default function Social() {
         </TabsContent>
 
         <TabsContent value="trending">
-          <StatusFeed />
+          <StatusFeed filter="trending" />
         </TabsContent>
 
         <TabsContent value="following">
           {user ? (
-            <StatusFeed />
+            <StatusFeed filter="following" />
           ) : (
             <div className="text-center py-12 text-muted-foreground">
               <Users className="h-12 w-12 mx-auto mb-4 opacity-50" />
