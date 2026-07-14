@@ -13,19 +13,45 @@ import { StatusComments } from '@/components/social/status-comments';
 import { useToast } from '@/hooks/use-toast';
 import { FollowButton } from '@/components/social/follow-button';
 
-export function StatusFeed() {
+interface StatusFeedProps {
+  filter?: 'all' | 'trending' | 'following';
+}
+
+export function StatusFeed({ filter = 'all' }: StatusFeedProps = {}) {
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const { toast } = useToast();
 
   const { data: statuses = [], isLoading } = useQuery({
-    queryKey: ['user-statuses'],
+    queryKey: ['user-statuses', filter, user?.id],
     queryFn: async () => {
-      const { data } = await supabase
+      let followingIds: string[] | null = null;
+      if (filter === 'following') {
+        if (!user) return [];
+        const { data: follows } = await supabase
+          .from('user_follows')
+          .select('following_id')
+          .eq('follower_id', user.id);
+        followingIds = follows?.map((f: any) => f.following_id) ?? [];
+        if (followingIds.length === 0) return [];
+      }
+
+      let query = supabase
         .from('user_statuses')
         .select('*')
-        .gt('expires_at', new Date().toISOString())
-        .order('created_at', { ascending: false });
+        .gt('expires_at', new Date().toISOString());
+
+      if (filter === 'following' && followingIds) {
+        query = query.in('user_id', followingIds);
+      }
+
+      if (filter === 'trending') {
+        query = query.order('likes_count', { ascending: false }).order('views_count', { ascending: false });
+      } else {
+        query = query.order('created_at', { ascending: false });
+      }
+
+      const { data } = await query;
       
       if (!data) return [];
       
