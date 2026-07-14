@@ -279,13 +279,20 @@ export default function Leaderboard() {
                           </div>
                         )}
                       </div>
-                      <FollowButton 
-                        userId={player.user_id} 
-                        username={player.profiles?.username}
-                        size="sm"
-                        variant="ghost"
-                        showText={false}
-                      />
+                      <div className="flex items-center gap-1">
+                        <FollowButton 
+                          userId={player.user_id} 
+                          username={player.profiles?.username}
+                          size="sm"
+                          variant="ghost"
+                          showText={false}
+                        />
+                        <Button asChild size="sm" variant="ghost" className="h-8 w-8 p-0" title="Message">
+                          <Link to={`/messages?user=${player.user_id}`}>
+                            <MessageCircle className="h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </div>
                     </div>
                     
                     {/* Record */}
