@@ -213,14 +213,27 @@ export function StatusFeed({ filter = 'all' }: StatusFeedProps = {}) {
                       {status.profile?.username ?? 'Unknown'}
                     </Link>
                     {user && user.id !== status.user_id && (
-                      <FollowButton 
-                        userId={status.user_id} 
-                        username={status.profile?.username}
-                        size="sm"
-                        variant="ghost"
-                        showText={false}
-                        className="h-7 w-7 p-0"
-                      />
+                      <>
+                        <FollowButton 
+                          userId={status.user_id} 
+                          username={status.profile?.username}
+                          size="sm"
+                          variant="ghost"
+                          showText={false}
+                          className="h-7 w-7 p-0"
+                        />
+                        <Button
+                          asChild
+                          variant="ghost"
+                          size="sm"
+                          className="h-7 w-7 p-0"
+                          title="Message"
+                        >
+                          <Link to={`/messages?user=${status.user_id}`}>
+                            <MessageCircle className="h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </>
                     )}
                   </div>
                   <p className="text-xs text-muted-foreground">
