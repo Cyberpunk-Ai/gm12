@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Trophy, Medal, TrendingUp, Crown, Phone, Zap } from 'lucide-react';
+import { Trophy, Medal, TrendingUp, Crown, Phone, Zap, MessageCircle } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -210,13 +210,19 @@ export default function Leaderboard() {
                         <TooltipContent>Contact via WhatsApp</TooltipContent>
                       </Tooltip>
                     )}
-                    <FollowButton 
-                      userId={player.user_id} 
-                      username={player.profiles?.username}
-                      size="sm"
-                      showText={false}
-                      className="mt-3"
-                    />
+                    <div className="flex justify-center gap-2 mt-3">
+                      <FollowButton 
+                        userId={player.user_id} 
+                        username={player.profiles?.username}
+                        size="sm"
+                        showText={false}
+                      />
+                      <Button asChild size="sm" variant="outline" title="Message">
+                        <Link to={`/messages?user=${player.user_id}`}>
+                          <MessageCircle className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                    </div>
                   </div>
                 );
               })}
@@ -273,13 +279,20 @@ export default function Leaderboard() {
                           </div>
                         )}
                       </div>
-                      <FollowButton 
-                        userId={player.user_id} 
-                        username={player.profiles?.username}
-                        size="sm"
-                        variant="ghost"
-                        showText={false}
-                      />
+                      <div className="flex items-center gap-1">
+                        <FollowButton 
+                          userId={player.user_id} 
+                          username={player.profiles?.username}
+                          size="sm"
+                          variant="ghost"
+                          showText={false}
+                        />
+                        <Button asChild size="sm" variant="ghost" className="h-8 w-8 p-0" title="Message">
+                          <Link to={`/messages?user=${player.user_id}`}>
+                            <MessageCircle className="h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </div>
                     </div>
                     
                     {/* Record */}

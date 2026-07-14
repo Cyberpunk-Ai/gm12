@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/lib/auth-context';
 import { formatDistanceToNow } from 'date-fns';
-import { Heart, Eye, Trash2, Image as ImageIcon, Share2, Lock } from 'lucide-react';
+import { Heart, Eye, Trash2, Image as ImageIcon, Share2, Lock, MessageCircle, Users } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -13,19 +13,45 @@ import { StatusComments } from '@/components/social/status-comments';
 import { useToast } from '@/hooks/use-toast';
 import { FollowButton } from '@/components/social/follow-button';
 
-export function StatusFeed() {
+interface StatusFeedProps {
+  filter?: 'all' | 'trending' | 'following';
+}
+
+export function StatusFeed({ filter = 'all' }: StatusFeedProps = {}) {
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const { toast } = useToast();
 
   const { data: statuses = [], isLoading } = useQuery({
-    queryKey: ['user-statuses'],
+    queryKey: ['user-statuses', filter, user?.id],
     queryFn: async () => {
-      const { data } = await supabase
+      let followingIds: string[] | null = null;
+      if (filter === 'following') {
+        if (!user) return [];
+        const { data: follows } = await supabase
+          .from('user_follows')
+          .select('following_id')
+          .eq('follower_id', user.id);
+        followingIds = follows?.map((f: any) => f.following_id) ?? [];
+        if (followingIds.length === 0) return [];
+      }
+
+      let query = supabase
         .from('user_statuses')
         .select('*')
-        .gt('expires_at', new Date().toISOString())
-        .order('created_at', { ascending: false });
+        .gt('expires_at', new Date().toISOString());
+
+      if (filter === 'following' && followingIds) {
+        query = query.in('user_id', followingIds);
+      }
+
+      if (filter === 'trending') {
+        query = query.order('likes_count', { ascending: false }).order('views_count', { ascending: false });
+      } else {
+        query = query.order('created_at', { ascending: false });
+      }
+
+      const { data } = await query;
       
       if (!data) return [];
       
@@ -145,9 +171,19 @@ export function StatusFeed() {
   if (statuses.length === 0) {
     return (
       <div className="text-center py-12 text-muted-foreground">
-        <ImageIcon className="h-12 w-12 mx-auto mb-4 opacity-50" />
-        <p>No status updates yet</p>
-        <p className="text-sm">Be the first to share what's on your mind!</p>
+        {filter === 'following' ? (
+          <>
+            <Users className="h-12 w-12 mx-auto mb-4 opacity-50" />
+            <p>No posts from people you follow yet</p>
+            <p className="text-sm">Follow players to see their status updates here</p>
+          </>
+        ) : (
+          <>
+            <ImageIcon className="h-12 w-12 mx-auto mb-4 opacity-50" />
+            <p>No status updates yet</p>
+            <p className="text-sm">Be the first to share what's on your mind!</p>
+          </>
+        )}
       </div>
     );
   }
@@ -177,14 +213,27 @@ export function StatusFeed() {
                       {status.profile?.username ?? 'Unknown'}
                     </Link>
                     {user && user.id !== status.user_id && (
-                      <FollowButton 
-                        userId={status.user_id} 
-                        username={status.profile?.username}
-                        size="sm"
-                        variant="ghost"
-                        showText={false}
-                        className="h-7 w-7 p-0"
-                      />
+                      <>
+                        <FollowButton 
+                          userId={status.user_id} 
+                          username={status.profile?.username}
+                          size="sm"
+                          variant="ghost"
+                          showText={false}
+                          className="h-7 w-7 p-0"
+                        />
+                        <Button
+                          asChild
+                          variant="ghost"
+                          size="sm"
+                          className="h-7 w-7 p-0"
+                          title="Message"
+                        >
+                          <Link to={`/messages?user=${status.user_id}`}>
+                            <MessageCircle className="h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </>
                     )}
                   </div>
                   <p className="text-xs text-muted-foreground">
