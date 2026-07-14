@@ -171,9 +171,19 @@ export function StatusFeed({ filter = 'all' }: StatusFeedProps = {}) {
   if (statuses.length === 0) {
     return (
       <div className="text-center py-12 text-muted-foreground">
-        <ImageIcon className="h-12 w-12 mx-auto mb-4 opacity-50" />
-        <p>No status updates yet</p>
-        <p className="text-sm">Be the first to share what's on your mind!</p>
+        {filter === 'following' ? (
+          <>
+            <Users className="h-12 w-12 mx-auto mb-4 opacity-50" />
+            <p>No posts from people you follow yet</p>
+            <p className="text-sm">Follow players to see their status updates here</p>
+          </>
+        ) : (
+          <>
+            <ImageIcon className="h-12 w-12 mx-auto mb-4 opacity-50" />
+            <p>No status updates yet</p>
+            <p className="text-sm">Be the first to share what's on your mind!</p>
+          </>
+        )}
       </div>
     );
   }
