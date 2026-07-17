@@ -73,6 +73,7 @@ const App = () => (
         <Sonner />
         <AppContent />
         <BrowserRouter>
+          <AnalyticsTracker />
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
