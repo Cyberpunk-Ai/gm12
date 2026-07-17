@@ -52,8 +52,10 @@ import AdminAchievements from "./pages/admin/AdminAchievements";
 import AdminRewards from "./pages/admin/AdminRewards";
 import AdminSupport from "./pages/admin/AdminSupport";
 import AdminLeaderboard from "./pages/admin/AdminLeaderboard";
+import AdminAnalytics from "./pages/admin/AdminAnalytics";
 import NotFound from "./pages/NotFound";
 import { usePushNotifications } from "./hooks/use-push-notifications";
+import { AnalyticsTracker } from "./components/analytics-tracker";
 
 // Wrapper component to use hooks
 function AppContent() {
@@ -71,6 +73,7 @@ const App = () => (
         <Sonner />
         <AppContent />
         <BrowserRouter>
+          <AnalyticsTracker />
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
@@ -109,6 +112,7 @@ const App = () => (
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
+              <Route path="analytics" element={<AdminAnalytics />} />
               <Route path="tournaments" element={<AdminTournaments />} />
               <Route path="registrations" element={<AdminRegistrations />} />
               <Route path="matches" element={<AdminMatches />} />

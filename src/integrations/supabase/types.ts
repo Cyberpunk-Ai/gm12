@@ -818,6 +818,108 @@ export type Database = {
           },
         ]
       }
+      user_analytics: {
+        Row: {
+          browser_name: string | null
+          browser_version: string | null
+          city: string | null
+          connection_type: string | null
+          country: string | null
+          country_code: string | null
+          created_at: string
+          device_model: string | null
+          device_type: string | null
+          device_vendor: string | null
+          duration_ms: number | null
+          event_type: string
+          id: string
+          ip_address: string | null
+          isp: string | null
+          language: string | null
+          latitude: number | null
+          longitude: number | null
+          metadata: Json | null
+          os_name: string | null
+          os_version: string | null
+          page_title: string | null
+          path: string | null
+          referrer: string | null
+          region: string | null
+          screen_resolution: string | null
+          session_id: string | null
+          timezone: string | null
+          user_agent: string | null
+          user_id: string | null
+          viewport: string | null
+        }
+        Insert: {
+          browser_name?: string | null
+          browser_version?: string | null
+          city?: string | null
+          connection_type?: string | null
+          country?: string | null
+          country_code?: string | null
+          created_at?: string
+          device_model?: string | null
+          device_type?: string | null
+          device_vendor?: string | null
+          duration_ms?: number | null
+          event_type?: string
+          id?: string
+          ip_address?: string | null
+          isp?: string | null
+          language?: string | null
+          latitude?: number | null
+          longitude?: number | null
+          metadata?: Json | null
+          os_name?: string | null
+          os_version?: string | null
+          page_title?: string | null
+          path?: string | null
+          referrer?: string | null
+          region?: string | null
+          screen_resolution?: string | null
+          session_id?: string | null
+          timezone?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+          viewport?: string | null
+        }
+        Update: {
+          browser_name?: string | null
+          browser_version?: string | null
+          city?: string | null
+          connection_type?: string | null
+          country?: string | null
+          country_code?: string | null
+          created_at?: string
+          device_model?: string | null
+          device_type?: string | null
+          device_vendor?: string | null
+          duration_ms?: number | null
+          event_type?: string
+          id?: string
+          ip_address?: string | null
+          isp?: string | null
+          language?: string | null
+          latitude?: number | null
+          longitude?: number | null
+          metadata?: Json | null
+          os_name?: string | null
+          os_version?: string | null
+          page_title?: string | null
+          path?: string | null
+          referrer?: string | null
+          region?: string | null
+          screen_resolution?: string | null
+          session_id?: string | null
+          timezone?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+          viewport?: string | null
+        }
+        Relationships: []
+      }
       user_follows: {
         Row: {
           created_at: string
