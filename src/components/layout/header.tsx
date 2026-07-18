@@ -33,7 +33,6 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'Live', href: '/live', live: true },
   { name: 'Tournaments', href: '/tournaments' },
   { name: 'Leaderboard', href: '/leaderboard' },
   { name: 'Achievements', href: '/achievements' },
@@ -113,13 +112,12 @@ export function Header() {
               key={item.name}
               to={item.href}
               className={cn(
-                "px-4 py-2 rounded-lg text-sm font-medium transition-colors inline-flex items-center gap-1.5",
+                "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
                 isActive(item.href)
                   ? "bg-primary/10 text-primary"
                   : "text-muted-foreground hover:text-foreground hover:bg-secondary"
               )}
             >
-              {item.live && <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />}
               {item.name}
             </Link>
           ))}
@@ -247,13 +245,12 @@ export function Header() {
                 to={item.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className={cn(
-                  "flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-colors",
+                  "block px-4 py-3 rounded-lg text-sm font-medium transition-colors",
                   isActive(item.href)
                     ? "bg-primary/10 text-primary"
                     : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                 )}
               >
-                {item.live && <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />}
                 {item.name}
               </Link>
             ))}

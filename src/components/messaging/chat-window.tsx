@@ -21,11 +21,7 @@ export function ChatWindow({ conversationId, otherUser, onBack }: ChatWindowProp
   const queryClient = useQueryClient();
   const [newMessage, setNewMessage] = useState('');
   const [decryptedMessages, setDecryptedMessages] = useState<Map<string, string>>(new Map());
-  const [isOtherOnline, setIsOtherOnline] = useState(false);
-  const [isOtherTyping, setIsOtherTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const presenceChannelRef = useRef<ReturnType<typeof supabase.channel> | null>(null);
-  const typingTimeoutRef = useRef<number | null>(null);
 
   const { data: messages = [], isLoading } = useQuery({
     queryKey: ['messages', conversationId],
@@ -78,48 +74,6 @@ export function ChatWindow({ conversationId, otherUser, onBack }: ChatWindowProp
       supabase.removeChannel(channel);
     };
   }, [conversationId, queryClient]);
-
-  // Presence + typing channel
-  useEffect(() => {
-    if (!user || !conversationId) return;
-    const channel = supabase.channel(`presence-${conversationId}`, {
-      config: { presence: { key: user.id } },
-    });
-    presenceChannelRef.current = channel;
-    channel
-      .on('presence', { event: 'sync' }, () => {
-        const state = channel.presenceState();
-        setIsOtherOnline(!!(otherUser?.user_id && state[otherUser.user_id]));
-      })
-      .on('broadcast', { event: 'typing' }, (payload: any) => {
-        if (payload.payload?.userId === otherUser?.user_id) {
-          setIsOtherTyping(!!payload.payload?.typing);
-        }
-      })
-      .subscribe(async (status) => {
-        if (status === 'SUBSCRIBED') await channel.track({ online_at: Date.now() });
-      });
-
-    return () => {
-      supabase.removeChannel(channel);
-      presenceChannelRef.current = null;
-    };
-  }, [conversationId, user, otherUser?.user_id]);
-
-  const sendTyping = (typing: boolean) => {
-    presenceChannelRef.current?.send({
-      type: 'broadcast',
-      event: 'typing',
-      payload: { userId: user?.id, typing },
-    });
-  };
-
-  const handleTypingChange = (value: string) => {
-    setNewMessage(value);
-    sendTyping(true);
-    if (typingTimeoutRef.current) window.clearTimeout(typingTimeoutRef.current);
-    typingTimeoutRef.current = window.setTimeout(() => sendTyping(false), 1500);
-  };
 
   // Scroll to bottom on new messages
   useEffect(() => {
@@ -198,25 +152,10 @@ export function ChatWindow({ conversationId, otherUser, onBack }: ChatWindowProp
           <AvatarFallback>{otherUser?.username?.charAt(0).toUpperCase() ?? '?'}</AvatarFallback>
         </Avatar>
         <div className="flex-1">
-          <div className="flex items-center gap-2">
-            <p className="font-medium">{otherUser?.username ?? 'Unknown'}</p>
-            <span
-              className={cn(
-                'w-2 h-2 rounded-full',
-                isOtherOnline ? 'bg-green-500' : 'bg-muted-foreground/40'
-              )}
-              title={isOtherOnline ? 'Online' : 'Offline'}
-            />
-          </div>
+          <p className="font-medium">{otherUser?.username ?? 'Unknown'}</p>
           <div className="flex items-center gap-1 text-xs text-muted-foreground">
-            {isOtherTyping ? (
-              <span className="text-primary animate-pulse">typing…</span>
-            ) : (
-              <>
-                <Lock className="h-3 w-3" />
-                <span>End-to-end encrypted</span>
-              </>
-            )}
+            <Lock className="h-3 w-3" />
+            <span>End-to-end encrypted</span>
           </div>
         </div>
       </div>
@@ -266,7 +205,7 @@ export function ChatWindow({ conversationId, otherUser, onBack }: ChatWindowProp
         <div className="flex gap-2">
           <Input
             value={newMessage}
-            onChange={(e) => handleTypingChange(e.target.value)}
+            onChange={(e) => setNewMessage(e.target.value)}
             placeholder="Type a message..."
             onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleSend()}
             className="flex-1"

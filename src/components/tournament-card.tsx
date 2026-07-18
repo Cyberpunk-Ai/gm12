@@ -188,12 +188,12 @@ export const TournamentCard = forwardRef<HTMLDivElement, TournamentCardProps>(
 
         {/* Action */}
         <Button
-          variant={tournament.status === 'live' ? 'destructive' : tournament.status === 'registration_open' ? 'default' : 'outline'}
+          variant={tournament.status === 'registration_open' ? 'default' : 'outline'}
           className="w-full"
           asChild
           disabled={tournament.status === 'completed' || tournament.status === 'cancelled'}
         >
-          <Link to={tournament.status === 'live' ? `/live` : `/tournaments/${tournament.id}`}>
+          <Link to={`/tournaments/${tournament.id}`}>
             {tournament.status === 'live' ? 'Watch Live' :
              tournament.status === 'registration_open' ? 'Register Now' :
              tournament.status === 'completed' ? 'View Results' :
