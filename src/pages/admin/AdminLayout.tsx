@@ -1,10 +1,11 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Users, Trophy, CreditCard, ClipboardList, Swords, Gamepad2, Store, Shield, Award, Gift, MessageSquare, TrendingUp } from 'lucide-react';
+import { LayoutDashboard, Users, Trophy, CreditCard, ClipboardList, Swords, Gamepad2, Store, Shield, Award, Gift, MessageSquare, TrendingUp, BarChart3 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/lib/auth-context';
 
 const adminNav = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+  { name: 'Analytics', href: '/admin/analytics', icon: BarChart3 },
   { name: 'Tournaments', href: '/admin/tournaments', icon: Trophy },
   { name: 'Registrations', href: '/admin/registrations', icon: ClipboardList },
   { name: 'Matches', href: '/admin/matches', icon: Swords },
@@ -47,10 +48,10 @@ export default function AdminLayout() {
       </aside>
 
       {/* Mobile Nav */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-card border-t border-border/50 p-2 z-50">
-        <div className="flex justify-around">
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-card border-t border-border/50 p-2 z-50 overflow-x-auto">
+        <div className="flex gap-1 min-w-max px-2">
           {adminNav.map((item) => (
-            <Link key={item.name} to={item.href} className={cn("flex flex-col items-center gap-1 p-2 rounded-lg text-xs", location.pathname === item.href ? "text-primary" : "text-muted-foreground")}>
+            <Link key={item.name} to={item.href} className={cn("flex flex-col items-center gap-1 p-2 rounded-lg text-[10px] min-w-[60px]", location.pathname === item.href ? "text-primary" : "text-muted-foreground")}>
               <item.icon className="h-5 w-5" />
               {item.name}
             </Link>
