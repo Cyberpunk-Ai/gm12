@@ -76,11 +76,11 @@ export function CreateStatus() {
         
         if (uploadError) throw uploadError;
         
-        const { data: urlData } = supabase.storage
+        const { data: urlData } = await supabase.storage
           .from('status-media')
-          .getPublicUrl(filePath);
+          .createSignedUrl(filePath, 60 * 60 * 24 * 365);
         
-        mediaUrl = urlData.publicUrl;
+        mediaUrl = urlData?.signedUrl ?? null;
       }
       
       const { error } = await supabase.from('user_statuses').insert({
