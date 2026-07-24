@@ -130,7 +130,7 @@ export function SocialProfileView({ userId }: { userId?: string }) {
             <div><b>{profile.followers_count ?? 0}</b> followers</div>
             <div><b>{profile.following_count ?? 0}</b> following</div>
           </div>
-          {profile.full_name && <div className="mt-2 font-semibold text-sm">{profile.full_name}</div>}
+          {profile.game_handle && <div className="mt-2 font-semibold text-sm">{profile.game_handle}</div>}
           {profile.bio && <div className="mt-1 text-sm whitespace-pre-wrap">{profile.bio}</div>}
         </div>
       </div>

@@ -14,7 +14,7 @@ const items = [
 ];
 
 export function MoreMenu() {
-  const { signOut } = useAuth();
+  const { logout } = useAuth();
   return (
     <div className="max-w-md mx-auto space-y-3">
       <Card className="divide-y divide-border/60">
@@ -25,7 +25,7 @@ export function MoreMenu() {
           </Link>
         ))}
       </Card>
-      <Button variant="ghost" className="w-full text-destructive" onClick={() => signOut?.()}>
+      <Button variant="ghost" className="w-full text-destructive" onClick={() => logout()}>
         <LogOut className="h-4 w-4 mr-2" /> Log out
       </Button>
     </div>
